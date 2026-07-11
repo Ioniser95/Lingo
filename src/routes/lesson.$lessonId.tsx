@@ -7,6 +7,7 @@ import { Heart, X } from "lucide-react";
 
 import { findLesson, type Exercise } from "@/lib/course-data";
 import { useLearner } from "@/lib/store";
+import { playCorrect, playWrong, playComplete } from "@/lib/sounds";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { MultipleChoice } from "@/components/lesson/MultipleChoice";
 import { Translate } from "@/components/lesson/Translate";
@@ -71,10 +72,13 @@ export default function LessonPage() {
     if (!canCheck || checked) return;
     const ok = isCorrect(exercise, current);
     setChecked(ok ? "correct" : "wrong");
-    if (ok) setCorrectCount((c) => c + 1);
-    else {
+    if (ok) {
+      setCorrectCount((c) => c + 1);
+      playCorrect();
+    } else {
       setWrongCount((c) => c + 1);
       loseHeart();
+      playWrong();
     }
   }
 
@@ -88,7 +92,10 @@ export default function LessonPage() {
   // Match Pairs auto-completes when all pairs are matched.
   const onMatchComplete = useCallback((allCorrect: boolean) => {
     setChecked(allCorrect ? "correct" : "wrong");
-    if (allCorrect) setCorrectCount((c) => c + 1);
+    if (allCorrect) {
+      setCorrectCount((c) => c + 1);
+      playCorrect();
+    }
   }, []);
 
   function finish() {
@@ -98,6 +105,7 @@ export default function LessonPage() {
     completeLesson(lesson.id, xpEarned);
     setCompleted(true);
     confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
+    playComplete();
   }
 
   return (
