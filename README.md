@@ -1,6 +1,4 @@
 # Lingo — a Duolingo-style learning app
-
-**Live Demo:** [https://lingo-alpha-coral.vercel.app/](https://lingo-alpha-coral.vercel.app/)
 A functional Duolingo clone featuring a skill tree, lesson player with five exercise types, XP, streak, hearts, gems, leaderboard, profile, and shop. It features a playful UI faithful to Duolingo's visual language (Owl green, Macaw blue, chunky 4px-shadow buttons, Nunito display type) and includes full dark mode support.
 
 ## Tech stack
