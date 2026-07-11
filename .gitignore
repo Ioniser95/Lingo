@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 # Backend
-backend/venv/
-backend/__pycache__/
-backend/*.db
-backend/*.sqlite3
+api/venv/
+api/__pycache__/
+api/*.db
+api/*.sqlite3
