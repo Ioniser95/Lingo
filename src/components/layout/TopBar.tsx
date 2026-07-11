@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Flame, Gem, Heart } from "lucide-react";
+import { useTheme } from "../../hooks/use-theme";
+import { Flame, Gem, Heart, Moon, Sun } from "lucide-react";
 import { useLearner } from "@/lib/store";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { spanishCourse } from "@/lib/course-data";
@@ -11,6 +12,7 @@ export function TopBar() {
   const gems = useLearner((s) => s.gems);
   const hearts = useLearner((s) => s.hearts);
   const tickHearts = useLearner((s) => s.tickHearts);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     tickHearts();
@@ -22,7 +24,18 @@ export function TopBar() {
 
   return (
     <header className="sticky top-0 z-30 bg-snow/90 backdrop-blur border-b-2 border-wolf">
-      <div className="max-w-3xl mx-auto flex items-center justify-end gap-5 px-4 py-3">
+      <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
+        {/* Mobile Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="md:hidden text-hare hover:text-eel transition-colors"
+          aria-label="Toggle theme"
+        >
+          {theme === "dark" ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+        </button>
+        
+        {/* Stats Container - pushed to the right */}
+        <div className="flex items-center gap-5 ml-auto">
         <Stat icon={<span className="text-2xl leading-none">{spanishCourse.flag}</span>} value="" />
         <Stat
           icon={<Flame className="w-6 h-6" strokeWidth={2.5} fill={values.streak > 0 ? "currentColor" : "none"} />}
@@ -35,6 +48,7 @@ export function TopBar() {
           value={values.hearts}
           color={values.hearts > 0 ? "text-cardinal" : "text-hare"}
         />
+      </div>
       </div>
     </header>
   );
