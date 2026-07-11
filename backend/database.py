@@ -1,8 +1,10 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./lingo.db"
+DB_DIR = os.getenv("DATA_DIR", ".")
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_DIR}/lingo.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

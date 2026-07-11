@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: lingo-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATA_DIR
+        value: /data
+    disk:
+      name: lingo-db
+      mountPath: /data
+      sizeGB: 1
