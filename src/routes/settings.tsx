@@ -17,7 +17,7 @@ export default function SettingsPage() {
         <div className="grid gap-4">
           <Field label="Display name">
             <input
-              className="w-full rounded-xl border-2 border-wolf px-4 py-3 font-bold outline-none focus:border-macaw"
+              className="w-full rounded-xl border-2 border-wolf px-4 py-3 font-bold outline-none focus:border-macaw bg-snow text-eel dark:bg-eel dark:text-snow dark:border-wolf/50"
               value={learner.name}
               onChange={(e) => useLearner.setState({ name: e.target.value })}
             />
