@@ -58,7 +58,12 @@ export default function SettingsPage() {
           type="button"
           onClick={() => {
             if (confirm("Reset all progress? This cannot be undone.")) {
-              learner.reset();
+              useLearner.setState({
+                xp: 0,
+                streak: 0,
+                todayXp: 0,
+                progress: {},
+              });
               toast.success("Progress reset");
             }
           }}

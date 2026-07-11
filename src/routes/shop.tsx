@@ -13,8 +13,8 @@ export default function ShopPage() {
 
   const heartsFull = hydrated && hearts >= MAX_HEARTS;
 
-  function onRefill() {
-    const ok = refill();
+  async function onRefill() {
+    const ok = await refill();
     if (ok) toast.success("Hearts refilled!", { description: "You're ready to learn." });
     else if (heartsFull) toast.info("Your hearts are already full!");
     else toast.error("Not enough gems", { description: "Come back tomorrow — or keep practicing!" });
