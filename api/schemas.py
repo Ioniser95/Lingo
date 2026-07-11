@@ -14,7 +14,7 @@ class SkillProgress(SkillProgressBase):
     skill_id: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class LearnerStateBase(BaseModel):
     name: str
@@ -32,7 +32,7 @@ class LearnerState(LearnerStateBase):
     progress: Dict[str, SkillProgressBase]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class XpRequest(BaseModel):
     amount: int
