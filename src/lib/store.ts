@@ -51,15 +51,13 @@ const initial: Omit<
   progress: {},
 };
 
-const API_BASE = import.meta.env.VITE_API_URL || '';
-
 export const useLearner = create<LearnerState>()(
   (set, get) => ({
     ...initial,
 
     fetchLearner: async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/learner`);
+        const res = await fetch('/api/learner');
         if (res.ok) {
           const data = await res.json();
           set(data);
@@ -71,7 +69,7 @@ export const useLearner = create<LearnerState>()(
 
     tickHearts: async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/learner`);
+        const res = await fetch('/api/learner');
         if (res.ok) set(await res.json());
       } catch (e) {}
     },
@@ -79,7 +77,7 @@ export const useLearner = create<LearnerState>()(
     gainXp: async (amount) => {
       set((s) => ({ xp: s.xp + amount, todayXp: s.todayXp + amount }));
       try {
-        const res = await fetch(`${API_BASE}/api/learner/xp`, {
+        const res = await fetch('/api/learner/xp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ amount })
@@ -94,7 +92,7 @@ export const useLearner = create<LearnerState>()(
         heartsUpdatedAt: s.hearts === MAX_HEARTS ? Date.now() : s.heartsUpdatedAt,
       }));
       try {
-        const res = await fetch(`${API_BASE}/api/learner/heart/lose`, { method: 'POST' });
+        const res = await fetch('/api/learner/heart/lose', { method: 'POST' });
         if (res.ok) set(await res.json());
       } catch (e) {}
     },
@@ -105,7 +103,7 @@ export const useLearner = create<LearnerState>()(
       if (s.hearts >= MAX_HEARTS || s.gems < cost) return false;
       set({ hearts: MAX_HEARTS, gems: s.gems - cost, heartsUpdatedAt: Date.now() });
       try {
-        const res = await fetch(`${API_BASE}/api/learner/heart/refill`, { method: 'POST' });
+        const res = await fetch('/api/learner/heart/refill', { method: 'POST' });
         if (res.ok) {
           set(await res.json());
           return true;
@@ -135,7 +133,7 @@ export const useLearner = create<LearnerState>()(
       }));
 
       try {
-        const res = await fetch(`${API_BASE}/api/learner/lesson/complete`, {
+        const res = await fetch('/api/learner/lesson/complete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
