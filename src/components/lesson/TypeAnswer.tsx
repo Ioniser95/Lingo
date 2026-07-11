@@ -27,10 +27,10 @@ export function TypeAnswer({ exercise, value, onChange, locked, checkedResult }:
         className={
           "w-full rounded-2xl border-2 p-4 text-lg font-bold outline-none resize-none transition " +
           (checkedResult === "correct"
-            ? "border-owl bg-sea-sponge"
+            ? "border-owl bg-sea-sponge text-owl-shadow dark:bg-owl/20 dark:text-owl"
             : checkedResult === "wrong"
-              ? "border-cardinal bg-humpback"
-              : "border-wolf focus:border-macaw")
+              ? "border-cardinal bg-humpback text-cardinal-shadow dark:bg-cardinal/20 dark:text-cardinal"
+              : "border-wolf focus:border-macaw bg-snow text-eel dark:bg-eel dark:text-snow dark:border-wolf/50")
         }
       />
       {checkedResult === "wrong" && (
